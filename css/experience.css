@@ -1,0 +1,99 @@
+.experience__container {
+  display: flex;
+  gap: var(--space-xl);
+}
+
+.experience__tabs {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  border-left: 2px solid var(--color-bg-lighter);
+}
+
+.experience__tab {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.experience__tab:hover {
+  color: var(--color-accent);
+  background: var(--color-accent-tint);
+}
+
+.experience__tab.active {
+  color: var(--color-accent);
+}
+
+.experience__indicator {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  width: 2px;
+  height: 42px;
+  background: var(--color-accent);
+  transition: transform var(--transition-base);
+  border-radius: 2px;
+}
+
+.experience__panels {
+  flex: 1;
+  min-height: 350px;
+}
+
+.experience__panel {
+  display: none;
+}
+
+.experience__panel.active {
+  display: block;
+  animation: fadeIn 300ms ease;
+}
+
+.experience__title {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-xs);
+}
+
+.experience__company {
+  color: var(--color-accent);
+}
+
+.experience__range {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.experience__list {
+  padding: 0;
+}
+
+.experience__list li {
+  position: relative;
+  padding-left: 1.75rem;
+  margin-bottom: var(--space-sm);
+  font-size: var(--fs-base);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.experience__list li::before {
+  content: '\25B9';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+}

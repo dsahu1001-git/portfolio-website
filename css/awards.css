@@ -1,0 +1,76 @@
+.awards__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.awards__card {
+  background: var(--color-bg-light);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-lg);
+  text-align: center;
+  transition: transform var(--transition-base);
+}
+
+@media (hover: hover) {
+  .awards__card:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.awards__icon {
+  margin-bottom: var(--space-sm);
+}
+
+.awards__title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-md);
+  color: var(--color-white);
+  margin-bottom: 0.25rem;
+}
+
+.awards__org {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
+}
+
+.awards__desc {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.awards__certs {
+  text-align: center;
+}
+
+.awards__certs-title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  color: var(--color-white);
+  margin-bottom: var(--space-md);
+}
+
+.awards__certs-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.awards__cert-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  transition: background var(--transition-fast);
+}
+
+.awards__cert-badge:hover {
+  background: var(--color-accent-tint);
+}

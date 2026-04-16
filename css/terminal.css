@@ -1,0 +1,164 @@
+.terminal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 25, 47, 0.9);
+  backdrop-filter: blur(5px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.terminal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.terminal {
+  width: 90%;
+  max-width: 700px;
+  max-height: 80vh;
+  background: #0a0e14;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-bg-lighter);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transform: scale(0.95) translateY(10px);
+  transition: transform var(--transition-base);
+}
+
+.terminal-overlay.active .terminal {
+  transform: scale(1) translateY(0);
+}
+
+.terminal__header {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: #1a1e26;
+  border-bottom: 1px solid #2a2e36;
+}
+
+.terminal__dots {
+  display: flex;
+  gap: 8px;
+  margin-right: var(--space-sm);
+}
+
+.terminal__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal__dot--red { background: #ff5f57; }
+.terminal__dot--yellow { background: #febc2e; }
+.terminal__dot--green { background: #28c840; }
+
+.terminal__title {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+.terminal__close {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+.terminal__close:hover {
+  color: var(--color-white);
+}
+
+.terminal__body {
+  padding: var(--space-sm);
+  height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal__output {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.terminal__line {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.terminal__line--welcome {
+  color: var(--color-text-muted);
+}
+
+.terminal__line--command {
+  color: var(--color-white);
+}
+
+.terminal__line--command::before {
+  content: 'visitor@deepaksahu.dev:~$ ';
+  color: var(--color-accent);
+}
+
+.terminal__line--error {
+  color: #ff6b6b;
+}
+
+.terminal__highlight {
+  color: var(--color-accent);
+}
+
+.terminal__input-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: var(--space-xs);
+}
+
+.terminal__prompt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.terminal__input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-white);
+  caret-color: var(--color-accent);
+}
+
+/* Custom scrollbar for terminal */
+.terminal__body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terminal__body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terminal__body::-webkit-scrollbar-thumb {
+  background: var(--color-bg-lighter);
+  border-radius: 3px;
+}

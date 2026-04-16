@@ -1,0 +1,186 @@
+/* ==================== Mobile (< 768px) ==================== */
+@media (max-width: 767px) {
+  /* Nav */
+  .nav__hamburger {
+    display: flex;
+  }
+
+  .nav__links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(75vw, 400px);
+    height: 100vh;
+    background: var(--color-bg-light);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-lg);
+    transform: translateX(100%);
+    transition: transform var(--transition-base);
+    box-shadow: -10px 0 30px rgba(2, 12, 27, 0.7);
+    z-index: 105;
+  }
+
+  .nav__links.active {
+    transform: translateX(0);
+  }
+
+  .nav__links ol {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .nav__links ol li a {
+    font-size: var(--fs-md);
+  }
+
+  /* Side elements */
+  .side-element {
+    display: none;
+  }
+
+  /* Hero */
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding-top: calc(var(--nav-height) + 2rem);
+  }
+
+  .hero__avatar {
+    display: none;
+  }
+
+  .hero__cta {
+    flex-direction: column;
+  }
+
+  .hero__cta .btn {
+    text-align: center;
+  }
+
+  /* About */
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .about__avatar {
+    order: -1;
+  }
+
+  .about__avatar-wrapper {
+    width: 180px;
+    height: 180px;
+  }
+
+  /* Experience */
+  .experience__container {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .experience__tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    border-left: none;
+    border-bottom: 2px solid var(--color-bg-lighter);
+    min-width: unset;
+  }
+
+  .experience__tab {
+    padding: 0.75rem 1rem;
+  }
+
+  .experience__indicator {
+    top: unset;
+    bottom: -2px;
+    left: 0;
+    width: auto;
+    height: 2px;
+    transition: transform var(--transition-base), width var(--transition-base);
+  }
+
+  .experience__panels {
+    min-height: unset;
+  }
+
+  /* Skills */
+  .skills__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skills__list {
+    columns: 2;
+  }
+
+  /* Metrics */
+  .metrics__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  /* Projects */
+  .projects__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Awards */
+  .awards__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Terminal toggle */
+  .terminal-toggle {
+    bottom: 1rem;
+  }
+}
+
+/* ==================== Tablets (768px - 1023px) ==================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero__avatar {
+    display: none;
+  }
+
+  .hero {
+    justify-content: center;
+  }
+
+  .about__grid {
+    grid-template-columns: 3fr 2fr;
+  }
+
+  .skills__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .metrics__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==================== Desktop (1024px+) ==================== */
+@media (min-width: 1024px) {
+  .skills__grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .metrics__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==================== Body overlay when mobile menu open ==================== */
+body.nav-open {
+  overflow: hidden;
+}
+
+body.nav-open::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 25, 47, 0.7);
+  z-index: 100;
+}

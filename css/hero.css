@@ -1,0 +1,111 @@
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  min-height: 100vh;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--nav-height) clamp(1.5rem, 3vw, 3rem) 0;
+}
+
+.hero__content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero__greeting {
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
+  animation: fadeInUp 600ms ease forwards;
+  opacity: 0;
+}
+
+.hero__name {
+  font-size: var(--fs-3xl);
+  color: var(--color-white);
+  margin-bottom: var(--space-xs);
+  animation: fadeInUp 600ms ease forwards;
+  animation-delay: 100ms;
+  opacity: 0;
+}
+
+.hero__subtitle {
+  font-size: var(--fs-2xl);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  min-height: 1.2em;
+  animation: fadeInUp 600ms ease forwards;
+  animation-delay: 200ms;
+  opacity: 0;
+}
+
+#typed-text {
+  color: var(--color-text-muted);
+}
+
+.hero__cursor {
+  color: var(--color-accent);
+  animation: blink 1s infinite;
+  font-weight: 300;
+}
+
+.hero__description {
+  font-size: var(--fs-md);
+  color: var(--color-text-muted);
+  max-width: 540px;
+  margin-bottom: var(--space-lg);
+  animation: fadeInUp 600ms ease forwards;
+  animation-delay: 300ms;
+  opacity: 0;
+}
+
+.hero__cta {
+  display: flex;
+  gap: var(--space-sm);
+  animation: fadeInUp 600ms ease forwards;
+  animation-delay: 400ms;
+  opacity: 0;
+}
+
+.hero__avatar {
+  flex-shrink: 0;
+  animation: fadeIn 800ms ease forwards;
+  animation-delay: 500ms;
+  opacity: 0;
+}
+
+.hero__hexagon {
+  width: 280px;
+  height: 280px;
+  filter: drop-shadow(0 0 20px rgba(100, 255, 218, 0.15));
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}

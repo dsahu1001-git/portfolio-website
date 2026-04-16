@@ -1,0 +1,64 @@
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+}
+
+.project__card {
+  background: var(--color-bg-light);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+@media (hover: hover) {
+  .project__card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
+  }
+
+  .project__card:hover .project__title {
+    color: var(--color-accent);
+  }
+}
+
+.project__header {
+  margin-bottom: var(--space-lg);
+}
+
+.project__title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  color: var(--color-white);
+  margin-bottom: var(--space-sm);
+  transition: color var(--transition-fast);
+}
+
+.project__description {
+  font-size: var(--fs-base);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: var(--space-lg);
+}
+
+.project__tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.project__tech-list li {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+.project__tech-list li:not(:last-child)::after {
+  content: ' \00B7';
+  margin-left: 0.5rem;
+  color: var(--color-accent);
+}
