@@ -74,7 +74,7 @@ make scan-secrets
 - `.env.local.example` uses dummy values only.
 - Do not commit `.env`, `.env.local`, private keys, cloud credentials, state files, or local kube/cloud config.
 - GitHub Actions runs with `permissions: contents: read`. Deployment credentials are read from encrypted repository secrets only.
-- Install dependencies with `npm ci` in automation so `package-lock.json` remains the reproducible source of truth.
+- Install dependencies from `package-lock.json` in automation. The Cloudflare workflow includes Wrangler's optional platform packages explicitly.
 - See [SECURITY.md](SECURITY.md) and [.github/REPO_HARDENING.md](.github/REPO_HARDENING.md).
 
 ## Deployment Notes
