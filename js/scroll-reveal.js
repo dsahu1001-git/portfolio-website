@@ -3,6 +3,12 @@
 
   var revealElements = document.querySelectorAll('.reveal');
   if (!revealElements.length) return;
+  if (!('IntersectionObserver' in window)) {
+    revealElements.forEach(function(el) {
+      el.classList.add('revealed');
+    });
+    return;
+  }
 
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {

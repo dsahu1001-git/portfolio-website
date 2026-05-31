@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Platform in a Box architecture</title>
+  <desc id="desc">A golden path from service contract and Terraform through continuous integration, GitOps, Kubernetes, observability, and a developer portal.</desc>
+  <rect width="1600" height="900" fill="#020617"/>
+  <rect x="72" y="72" width="1456" height="756" rx="32" fill="#0f172a" stroke="#1e293b" stroke-width="3"/>
+  <text x="132" y="164" fill="#38bdf8" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">PLATFORM ENGINEERING GOLDEN PATH</text>
+  <text x="132" y="240" fill="#f8fafc" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="700">Platform in a Box</text>
+  <text x="132" y="294" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="28">From application intent to a governed, observable Kubernetes workload.</text>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <g transform="translate(132 406)">
+      <rect width="222" height="166" rx="18" fill="#172554" stroke="#38bdf8" stroke-width="3"/>
+      <text x="28" y="50" fill="#7dd3fc" font-size="20" font-weight="700">01</text>
+      <text x="28" y="94" fill="#f8fafc" font-size="28" font-weight="700">Contract</text>
+      <text x="28" y="130" fill="#94a3b8" font-size="20">Service intent</text>
+    </g>
+    <g transform="translate(410 406)">
+      <rect width="222" height="166" rx="18" fill="#172554" stroke="#38bdf8" stroke-width="3"/>
+      <text x="28" y="50" fill="#7dd3fc" font-size="20" font-weight="700">02</text>
+      <text x="28" y="94" fill="#f8fafc" font-size="28" font-weight="700">Terraform</text>
+      <text x="28" y="130" fill="#94a3b8" font-size="20">AWS + EKS + ECR</text>
+    </g>
+    <g transform="translate(688 406)">
+      <rect width="222" height="166" rx="18" fill="#172554" stroke="#38bdf8" stroke-width="3"/>
+      <text x="28" y="50" fill="#7dd3fc" font-size="20" font-weight="700">03</text>
+      <text x="28" y="94" fill="#f8fafc" font-size="28" font-weight="700">CI + GitOps</text>
+      <text x="28" y="130" fill="#94a3b8" font-size="20">Actions + Argo CD</text>
+    </g>
+    <g transform="translate(966 406)">
+      <rect width="222" height="166" rx="18" fill="#172554" stroke="#38bdf8" stroke-width="3"/>
+      <text x="28" y="50" fill="#7dd3fc" font-size="20" font-weight="700">04</text>
+      <text x="28" y="94" fill="#f8fafc" font-size="28" font-weight="700">Runtime</text>
+      <text x="28" y="130" fill="#94a3b8" font-size="20">Kubernetes + Helm</text>
+    </g>
+    <g transform="translate(1244 406)">
+      <rect width="222" height="166" rx="18" fill="#172554" stroke="#f59e0b" stroke-width="3"/>
+      <text x="28" y="50" fill="#fbbf24" font-size="20" font-weight="700">05</text>
+      <text x="28" y="94" fill="#f8fafc" font-size="28" font-weight="700">Portal</text>
+      <text x="28" y="130" fill="#94a3b8" font-size="20">Developer surface</text>
+    </g>
+    <g fill="#38bdf8">
+      <path d="M364 478h34v-14l28 25-28 25v-14h-34z"/>
+      <path d="M642 478h34v-14l28 25-28 25v-14h-34z"/>
+      <path d="M920 478h34v-14l28 25-28 25v-14h-34z"/>
+      <path d="M1198 478h34v-14l28 25-28 25v-14h-34z"/>
+    </g>
+  </g>
+
+  <rect x="132" y="650" width="1334" height="98" rx="18" fill="#111827" stroke="#1e293b" stroke-width="2"/>
+  <text x="176" y="708" fill="#f8fafc" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Observability and policy travel with the golden path</text>
+  <text x="1218" y="708" fill="#f59e0b" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Metrics | Logs | Drift</text>
+</svg>

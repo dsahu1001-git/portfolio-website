@@ -1,0 +1,20 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Deepak Kumar Sahu</title>
+  <desc id="desc">Senior Engineering Manager specializing in DevOps, Platform Engineering, Cloud Infrastructure, and Observability.</desc>
+  <rect width="1200" height="630" fill="#0a192f"/>
+  <circle cx="990" cy="120" r="260" fill="#112240"/>
+  <circle cx="1020" cy="520" r="180" fill="#0f2d3f"/>
+  <g fill="none" stroke="#64ffda" stroke-opacity="0.16" stroke-width="2">
+    <path d="M80 120h290M80 180h190M80 240h330M80 300h230"/>
+    <path d="M822 92l178 96v216l-178 96-178-96V188z"/>
+    <path d="M858 166l104 56v126l-104 56-104-56V222z"/>
+  </g>
+  <g transform="translate(82 106)">
+    <polygon points="76,0 152,42 152,126 76,168 0,126 0,42" fill="none" stroke="#64ffda" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="76" y="103" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="700" fill="#64ffda">DS</text>
+  </g>
+  <text x="80" y="345" font-family="Inter, Arial, sans-serif" font-size="74" font-weight="700" fill="#e6f1ff">Deepak Kumar Sahu</text>
+  <text x="82" y="415" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600" fill="#64ffda">Senior Engineering Manager</text>
+  <text x="82" y="476" font-family="Inter, Arial, sans-serif" font-size="28" fill="#ccd6f6">DevOps • Platform Engineering • Cloud Infrastructure • Observability</text>
+  <text x="82" y="540" font-family="Inter, Arial, sans-serif" font-size="24" fill="#8892b0">100+ Kubernetes clusters • 1,200+ workloads • AWS, GCP, Azure</text>
+</svg>

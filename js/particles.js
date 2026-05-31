@@ -3,6 +3,7 @@
 
   var canvas = document.getElementById('particle-canvas');
   if (!canvas) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var ctx = canvas.getContext('2d');
   var particles = [];

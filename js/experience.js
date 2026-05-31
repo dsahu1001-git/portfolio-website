@@ -4,7 +4,8 @@
   var tabs = document.querySelectorAll('.experience__tab');
   var panels = document.querySelectorAll('.experience__panel');
   var indicator = document.querySelector('.experience__indicator');
-  if (!tabs.length || !indicator) return;
+  var tabList = document.querySelector('.experience__tabs');
+  if (!tabs.length || !indicator || !tabList) return;
 
   function activateTab(tab) {
     var targetId = tab.getAttribute('aria-controls');
@@ -51,7 +52,6 @@
   });
 
   // Keyboard navigation
-  var tabList = document.querySelector('.experience__tabs');
   tabList.addEventListener('keydown', function(e) {
     var isMobile = window.innerWidth < 768;
     var prevKey = isMobile ? 'ArrowLeft' : 'ArrowUp';

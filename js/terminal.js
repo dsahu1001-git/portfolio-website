@@ -6,11 +6,21 @@
   var closeBtn = document.querySelector('.terminal__close');
   var input = document.getElementById('terminal-input');
   var output = document.getElementById('terminal-output');
+  var terminalBody = document.getElementById('terminal-body');
 
-  if (!overlay || !input) return;
+  if (!overlay || !toggleBtn || !closeBtn || !input || !output || !terminalBody) return;
 
   var history = [];
   var historyIndex = -1;
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
 
   // Command registry
   var commands = {
@@ -143,7 +153,7 @@
       if (!args || !args.length) return 'Usage: cat <filename>';
       var file = args[0].replace('.txt', '');
       if (commands[file]) return commands[file]();
-      return 'cat: ' + args[0] + ': No such file or directory';
+      return 'cat: ' + escapeHtml(args[0]) + ': No such file or directory';
     },
 
     whoami: function() {
@@ -204,10 +214,6 @@
         '                 <span class="terminal__highlight">Shell:</span> bash/zsh',
       ].join('\n');
     },
-
-    secret: function() {
-      return 'Games are coming soon! Stay tuned at deepaksahu.dev/games';
-    },
   };
 
   // Process command
@@ -229,7 +235,7 @@
     } else if (cmdString.trim() === '') {
       result = '';
     } else {
-      result = 'command not found: ' + cmd + '. Type <span class="terminal__highlight">help</span> for available commands.';
+      result = 'command not found: ' + escapeHtml(cmd) + '. Type <span class="terminal__highlight">help</span> for available commands.';
     }
 
     if (result) {
@@ -240,8 +246,7 @@
     }
 
     // Scroll to bottom
-    var termBody = document.getElementById('terminal-body');
-    termBody.scrollTop = termBody.scrollHeight;
+    terminalBody.scrollTop = terminalBody.scrollHeight;
   }
 
   // Open / close
@@ -312,7 +317,7 @@
   });
 
   // Click terminal body to focus input
-  document.querySelector('.terminal__body').addEventListener('click', function() {
+  terminalBody.addEventListener('click', function() {
     input.focus();
   });
 })();

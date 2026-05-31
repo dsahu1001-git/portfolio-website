@@ -3,6 +3,13 @@
 
   var counters = document.querySelectorAll('.metrics__number');
   if (!counters.length) return;
+  if (!('IntersectionObserver' in window)) {
+    counters.forEach(function(el) {
+      el.textContent = el.dataset.target + (el.dataset.suffix || '');
+      el.dataset.animated = 'true';
+    });
+    return;
+  }
 
   function easeOutCubic(t) {
     return 1 - Math.pow(1 - t, 3);
