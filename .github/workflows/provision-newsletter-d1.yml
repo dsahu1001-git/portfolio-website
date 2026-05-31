@@ -1,0 +1,42 @@
+name: Provision Newsletter D1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  provision:
+    name: Provision newsletter databases
+    runs-on: ubuntu-latest
+    environment: preview
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --include=optional
+
+      - name: Create missing databases
+        run: |
+          databases="$(npx wrangler d1 list --json)"
+          if ! echo "$databases" | jq -e '.[] | select(.name == "deepak-newsletter-preview")' >/dev/null; then
+            npx wrangler d1 create deepak-newsletter-preview --location apac
+          fi
+          if ! echo "$databases" | jq -e '.[] | select(.name == "deepak-newsletter-production")' >/dev/null; then
+            npx wrangler d1 create deepak-newsletter-production --location apac
+          fi
+
+      - name: Print database bindings
+        run: |
+          npx wrangler d1 list --json | jq '.[] | select(.name == "deepak-newsletter-preview" or .name == "deepak-newsletter-production") | {name, uuid}'
