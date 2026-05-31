@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import typography from '@tailwindcss/typography';
 
 const config: Config = {
   darkMode: ['class'],
@@ -16,8 +17,8 @@ const config: Config = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: '#0EA5E9',
-          foreground: '#FFFFFF',
+          DEFAULT: '#2DD4BF',
+          foreground: '#021315',
         },
         accent: {
           DEFAULT: '#F59E0B',
@@ -38,11 +39,13 @@ const config: Config = {
         mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
       },
       boxShadow: {
-        soft: '0 12px 40px rgba(15, 23, 42, 0.08)',
+        soft: '0 18px 60px rgba(2, 8, 23, 0.34)',
+        signal:
+          '0 0 0 1px rgba(45, 212, 191, 0.16), 0 18px 70px rgba(8, 145, 178, 0.12)',
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [typography],
 };
 
 export default config;

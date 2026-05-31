@@ -10,9 +10,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<ButtonVariant, string> = {
-  default: 'bg-primary text-primary-foreground hover:bg-sky-600',
-  outline: 'border border-border bg-background hover:bg-muted',
-  ghost: 'hover:bg-muted',
+  default:
+    'border border-primary bg-primary text-primary-foreground shadow-[0_0_24px_rgba(45,212,191,0.22)] hover:bg-teal-300',
+  outline:
+    'border border-border bg-background/60 text-foreground hover:border-primary hover:bg-muted',
+  ghost: 'text-muted-foreground hover:bg-muted hover:text-foreground',
 };
 
 export function Button({
@@ -24,7 +26,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const classes = cn(
-    'inline-flex min-h-10 items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
+    'inline-flex min-h-10 items-center justify-center rounded-md px-4 py-2 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
     variants[variant],
     className,
   );

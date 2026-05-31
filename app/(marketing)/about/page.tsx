@@ -11,9 +11,10 @@ export const metadata: Metadata = createMetadata({
 
 export default function AboutPage() {
   return (
-    <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-[0.8fr_1.2fr] lg:px-8">
+    <section className="systems-grid border-b border-border">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-[0.8fr_1.2fr] lg:px-8">
       <div>
-        <p className="font-mono text-sm text-primary">About</p>
+        <p className="font-mono text-xs uppercase text-primary">About / Origin</p>
         <h1 className="mt-3 font-heading text-4xl font-bold tracking-tight sm:text-5xl">
           I build teams and platforms that make delivery boring in the best way.
         </h1>
@@ -21,7 +22,8 @@ export default function AboutPage() {
           <SocialLinks />
         </div>
       </div>
-      <div className="space-y-5 text-lg leading-8 text-muted-foreground">
+      <div className="border-l border-primary/50 pl-6 text-lg leading-8 text-muted-foreground sm:pl-8">
+        <div className="space-y-5">
         <p>
           I was the founding DevOps hire at Storable India&apos;s GCC, where I
           built DevOps, SRE, platform engineering, and observability practices
@@ -38,6 +40,8 @@ export default function AboutPage() {
           technical blog first, with a few lightweight interactive extras added
           only to make the site more useful and engaging.
         </p>
+        </div>
+      </div>
       </div>
     </section>
   );

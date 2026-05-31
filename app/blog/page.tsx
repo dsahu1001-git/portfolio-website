@@ -18,10 +18,11 @@ export default function BlogIndexPage() {
   const tags = getAllTags();
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <section className="systems-grid border-b border-border">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="grid gap-10 lg:grid-cols-[1fr_280px]">
         <div>
-          <p className="font-mono text-sm text-primary">Blog</p>
+          <p className="font-mono text-xs uppercase text-primary">Field notes / Blog</p>
           <h1 className="mt-3 font-heading text-4xl font-bold tracking-tight sm:text-5xl">
             Practical notes from platform engineering work.
           </h1>
@@ -29,7 +30,7 @@ export default function BlogIndexPage() {
             <BlogList posts={posts} />
           </div>
         </div>
-        <aside className="space-y-8">
+        <aside className="space-y-8 border-l border-border pl-6">
           <div>
             <h2 className="font-semibold">Categories</h2>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -55,6 +56,7 @@ export default function BlogIndexPage() {
             </div>
           </div>
         </aside>
+      </div>
       </div>
     </section>
   );

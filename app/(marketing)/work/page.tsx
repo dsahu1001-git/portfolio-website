@@ -191,10 +191,12 @@ const recognition = [
 export default function WorkPage() {
   return (
     <>
-      <section className="border-b border-border">
+      <section className="systems-grid border-b border-border bg-card/35">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_360px] lg:px-8 lg:py-20">
           <div>
-            <p className="font-mono text-sm text-primary">Career portfolio</p>
+            <p className="font-mono text-xs uppercase text-primary">
+              Career portfolio / Recruiter console
+            </p>
             <h1 className="mt-3 max-w-4xl font-heading text-4xl font-bold tracking-tight sm:text-5xl">
               Platform engineering leadership from production operations to
               global-scale enablement.
@@ -220,7 +222,7 @@ export default function WorkPage() {
               </Button>
             </div>
           </div>
-          <aside className="rounded-xl border border-border bg-card p-6 shadow-sm">
+          <aside className="border border-border bg-background/65 p-6 shadow-signal backdrop-blur-sm">
             <div className="flex items-center gap-3">
               <BriefcaseBusiness
                 className="h-5 w-5 text-primary"
@@ -257,7 +259,7 @@ export default function WorkPage() {
         <h2 className="mt-2 font-heading text-3xl font-bold tracking-tight">
           The numbers behind the work
         </h2>
-        <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
+        <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
           {metrics.map(([value, label]) => (
             <div className="bg-card p-5" key={label}>
               <dt className="font-heading text-3xl font-bold text-primary">

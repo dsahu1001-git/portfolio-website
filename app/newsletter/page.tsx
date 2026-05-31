@@ -16,8 +16,9 @@ export default function NewsletterPage() {
   const editions = getNewsletterEditions();
 
   return (
-    <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-      <p className="font-mono text-sm text-primary">Newsletter</p>
+    <section className="systems-grid border-b border-border">
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+      <p className="font-mono text-xs uppercase text-primary">Newsletter / Intelligence briefing</p>
       <h1 className="mt-3 font-heading text-4xl font-bold sm:text-5xl">
         Deep Signals
       </h1>
@@ -30,7 +31,7 @@ export default function NewsletterPage() {
       </div>
       <div className="mt-12 grid gap-5">
         {editions.map((edition) => (
-          <Card key={edition.slug}>
+          <Card className="hover:border-primary hover:shadow-signal" key={edition.slug}>
             <CardHeader>
               <p className="font-mono text-xs text-primary">
                 {edition.publishedAt}
@@ -46,6 +47,7 @@ export default function NewsletterPage() {
             </CardContent>
           </Card>
         ))}
+      </div>
       </div>
     </section>
   );

@@ -17,7 +17,7 @@ export function Navigation() {
     >
       {links.map((link) => (
         <Link
-          className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          className="font-mono text-xs uppercase text-muted-foreground transition-colors hover:text-primary"
           href={link.href}
           key={link.href}
         >

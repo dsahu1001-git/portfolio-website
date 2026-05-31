@@ -9,27 +9,27 @@
     BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono',
     monospace;
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 199 89% 48%;
+  --background: 222 47% 5%;
+  --foreground: 190 40% 96%;
+  --card: 221 39% 9%;
+  --card-foreground: 190 40% 96%;
+  --muted: 218 28% 14%;
+  --muted-foreground: 202 18% 68%;
+  --border: 196 45% 21%;
+  --input: 196 36% 22%;
+  --ring: 185 92% 46%;
 }
 
 .dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 47.4% 11.2%;
-  --card-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 199 89% 48%;
+  --background: 222 47% 5%;
+  --foreground: 190 40% 96%;
+  --card: 221 39% 9%;
+  --card-foreground: 190 40% 96%;
+  --muted: 218 28% 14%;
+  --muted-foreground: 202 18% 68%;
+  --border: 196 45% 21%;
+  --input: 196 36% 22%;
+  --ring: 185 92% 46%;
 }
 
 * {
@@ -49,10 +49,21 @@ body {
 }
 
 ::selection {
-  background: #0ea5e9;
-  color: #ffffff;
+  background: #2dd4bf;
+  color: #021315;
 }
 
 .prose-brand {
   @apply prose prose-slate max-w-none dark:prose-invert prose-headings:font-heading prose-headings:tracking-tight prose-a:text-primary;
+}
+
+.systems-grid {
+  background-image:
+    linear-gradient(rgba(45, 212, 191, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 212, 191, 0.045) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.signal-line {
+  background: linear-gradient(90deg, #2dd4bf, #38bdf8 52%, #f59e0b);
 }
