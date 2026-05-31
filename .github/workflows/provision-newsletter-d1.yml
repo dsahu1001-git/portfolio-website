@@ -2,6 +2,11 @@ name: Provision Newsletter D1
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - preview
+    paths:
+      - .github/workflows/provision-newsletter-d1.yml
 
 permissions:
   contents: read
