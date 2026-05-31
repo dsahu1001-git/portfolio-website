@@ -127,7 +127,7 @@
       return [
         '<span class="terminal__highlight">Email:</span>    hello@deepaksahu.dev',
         '<span class="terminal__highlight">LinkedIn:</span> linkedin.com/in/dsahu1001',
-        '<span class="terminal__highlight">GitHub:</span>   github.com/dsahu1001',
+        '<span class="terminal__highlight">GitHub:</span>   github.com/dsahu1001-git',
         '<span class="terminal__highlight">Web:</span>      deepaksahu.dev',
       ].join('\n');
     },
