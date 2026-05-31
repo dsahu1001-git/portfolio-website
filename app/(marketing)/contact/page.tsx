@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
-import { Input } from '@/components/ui/Input';
-import { Textarea } from '@/components/ui/Textarea';
-import { Button } from '@/components/ui/Button';
+import { ContactForm } from '@/components/marketing/ContactForm';
 import { SocialLinks } from '@/components/marketing/SocialLinks';
 import { createMetadata } from '@/lib/seo';
 
@@ -29,26 +27,7 @@ export default function ContactPage() {
           <SocialLinks />
         </div>
       </div>
-      <form
-        action="/api/contact"
-        className="space-y-4 rounded-xl border border-border bg-card p-6"
-        method="post"
-      >
-        <Input name="name" placeholder="Your name" required />
-        <Input
-          name="email"
-          placeholder="you@example.com"
-          required
-          type="email"
-        />
-        <Input name="subject" placeholder="Subject" required />
-        <Textarea
-          name="message"
-          placeholder="What should we talk about?"
-          required
-        />
-        <Button type="submit">Send message</Button>
-      </form>
+      <ContactForm />
     </section>
   );
 }

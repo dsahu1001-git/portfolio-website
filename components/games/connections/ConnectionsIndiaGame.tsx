@@ -3,47 +3,17 @@
 import { RotateCcw, Shuffle } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import {
+  connectionsIndiaGroups,
+  type ConnectionGroup,
+} from '@/lib/connections-india';
 import { cn } from '@/lib/utils';
-
-interface ConnectionGroup {
-  name: string;
-  description: string;
-  color: string;
-  words: string[];
-}
 
 interface SolvedGroup extends ConnectionGroup {
   id: string;
 }
 
-const groups: ConnectionGroup[] = [
-  {
-    name: 'IPL Teams',
-    description: 'Franchise names from Indian Premier League cricket.',
-    color: 'bg-amber-500 text-black',
-    words: ['MI', 'CSK', 'RCB', 'KKR'],
-  },
-  {
-    name: 'Street Food',
-    description: 'Popular bites you will find across Indian streets.',
-    color: 'bg-sky-500 text-white',
-    words: ['VADA PAV', 'POHA', 'CHAAT', 'IDLI'],
-  },
-  {
-    name: 'UPI Apps',
-    description: 'Common payment apps used in India.',
-    color: 'bg-emerald-500 text-black',
-    words: ['GPAY', 'PHONEPE', 'PAYTM', 'BHIM'],
-  },
-  {
-    name: 'Hill Stations',
-    description: 'Classic Indian mountain getaways.',
-    color: 'bg-fuchsia-500 text-white',
-    words: ['SHIMLA', 'OOTY', 'MANALI', 'MUNNAR'],
-  },
-];
-
-const allWords = groups.flatMap((group) => group.words);
+const allWords = connectionsIndiaGroups.flatMap((group) => group.words);
 
 function stableShuffle(words: string[]) {
   return [...words].sort((a, b) => {
@@ -60,7 +30,9 @@ function randomShuffle(words: string[]) {
 function findSolvedGroup(selectedWords: string[]) {
   const selected = [...selectedWords].sort().join('|');
 
-  return groups.find((group) => [...group.words].sort().join('|') === selected);
+  return connectionsIndiaGroups.find(
+    (group) => [...group.words].sort().join('|') === selected,
+  );
 }
 
 export function ConnectionsIndiaGame() {
@@ -73,7 +45,7 @@ export function ConnectionsIndiaGame() {
     'Pick four tiles that share a hidden connection.',
   );
 
-  const isComplete = solvedGroups.length === groups.length;
+  const isComplete = solvedGroups.length === connectionsIndiaGroups.length;
   const remainingMistakes = Math.max(0, 4 - mistakes);
 
   function toggleWord(word: string) {
@@ -117,6 +89,18 @@ export function ConnectionsIndiaGame() {
     );
     setSelectedWords([]);
     setMessage(`Nice. You found ${solvedGroup.name}.`);
+
+    if (solvedGroups.length + 1 === connectionsIndiaGroups.length) {
+      void fetch('/api/game/score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          game: 'connections-india',
+          playerName: 'Anonymous visitor',
+          score: remainingMistakes,
+        }),
+      });
+    }
   }
 
   function shuffleRemaining() {

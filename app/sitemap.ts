@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getAllPosts } from '@/lib/markdown';
+import { getNewsletterEditions } from '@/lib/newsletter-content';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://deepaksahu.dev';
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/work',
     '/contact',
     '/blog',
+    '/newsletter',
     '/games',
     '/gear',
   ].map((route) => ({
@@ -21,5 +23,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(post.updatedAt ?? post.publishedAt),
   }));
 
-  return [...routes, ...posts];
+  const newsletterEditions = getNewsletterEditions().map((edition) => ({
+    url: `${siteUrl}/newsletter/${edition.slug}`,
+    lastModified: new Date(edition.publishedAt),
+  }));
+
+  return [...routes, ...posts, ...newsletterEditions];
 }

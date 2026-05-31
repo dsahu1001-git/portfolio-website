@@ -51,6 +51,15 @@ jobs:
       - name: Test
         run: npm run test
 
+      - name: Build
+        run: npm run build
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Browser regression tests
+        run: npm run test:e2e
+
       - name: Require main for production
         if: ${{ github.event.inputs.environment == 'production' && github.ref != 'refs/heads/main' }}
         run: |
@@ -59,14 +68,74 @@ jobs:
 
       - name: Deploy preview Worker
         if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/preview') || github.event.inputs.environment == 'preview' }}
-        run: npm run deploy:preview
+        run: npm run db:migrate:preview && npm run deploy:preview
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      - name: Deploy production Worker
-        if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event.inputs.environment == 'production' }}
-        run: npm run deploy:production
+      - name: Sync preview Worker secrets
+        if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/preview') || github.event.inputs.environment == 'preview' }}
+        run: |
+          sync_secret() {
+            name="$1"
+            value="$2"
+            if [ -n "$value" ]; then
+              printf '%s' "$value" | npx wrangler secret put "$name" --env preview
+            else
+              echo "Skipping unset Worker secret: $name"
+            fi
+          }
+          sync_secret RESEND_API_KEY "$RESEND_API_KEY"
+          sync_secret NEWSLETTER_ADMIN_TOKEN "$NEWSLETTER_ADMIN_TOKEN"
+          sync_secret RESEND_NEWSLETTER_SEGMENT_ID "$RESEND_NEWSLETTER_SEGMENT_ID"
+          sync_secret RESEND_TOPIC_AI_ID "$RESEND_TOPIC_AI_ID"
+          sync_secret RESEND_TOPIC_QUANTUM_ID "$RESEND_TOPIC_QUANTUM_ID"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEWSLETTER_ADMIN_TOKEN: ${{ secrets.NEWSLETTER_ADMIN_TOKEN }}
+          RESEND_NEWSLETTER_SEGMENT_ID: ${{ secrets.RESEND_NEWSLETTER_SEGMENT_ID }}
+          RESEND_TOPIC_AI_ID: ${{ secrets.RESEND_TOPIC_AI_ID }}
+          RESEND_TOPIC_QUANTUM_ID: ${{ secrets.RESEND_TOPIC_QUANTUM_ID }}
+
+      - name: Smoke check preview Worker
+        if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/preview') || github.event.inputs.environment == 'preview' }}
+        run: npm run smoke:preview
+
+      - name: Deploy production Worker
+        if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event.inputs.environment == 'production' }}
+        run: npm run db:migrate:production && npm run deploy:production
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Sync production Worker secrets
+        if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event.inputs.environment == 'production' }}
+        run: |
+          sync_secret() {
+            name="$1"
+            value="$2"
+            if [ -n "$value" ]; then
+              printf '%s' "$value" | npx wrangler secret put "$name" --env production
+            else
+              echo "Skipping unset Worker secret: $name"
+            fi
+          }
+          sync_secret RESEND_API_KEY "$RESEND_API_KEY"
+          sync_secret NEWSLETTER_ADMIN_TOKEN "$NEWSLETTER_ADMIN_TOKEN"
+          sync_secret RESEND_NEWSLETTER_SEGMENT_ID "$RESEND_NEWSLETTER_SEGMENT_ID"
+          sync_secret RESEND_TOPIC_AI_ID "$RESEND_TOPIC_AI_ID"
+          sync_secret RESEND_TOPIC_QUANTUM_ID "$RESEND_TOPIC_QUANTUM_ID"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEWSLETTER_ADMIN_TOKEN: ${{ secrets.NEWSLETTER_ADMIN_TOKEN }}
+          RESEND_NEWSLETTER_SEGMENT_ID: ${{ secrets.RESEND_NEWSLETTER_SEGMENT_ID }}
+          RESEND_TOPIC_AI_ID: ${{ secrets.RESEND_TOPIC_AI_ID }}
+          RESEND_TOPIC_QUANTUM_ID: ${{ secrets.RESEND_TOPIC_QUANTUM_ID }}
+
+      - name: Smoke check production Worker
+        if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event.inputs.environment == 'production' }}
+        run: npm run smoke:production

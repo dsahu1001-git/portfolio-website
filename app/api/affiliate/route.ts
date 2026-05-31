@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
+import { getCloudflareBindings, getRuntimeValue } from '@/lib/cloudflare';
 
 function getAllowedHosts() {
   return new Set(
-    (process.env.ALLOWED_AFFILIATE_HOSTS ?? 'example.com')
+    (getRuntimeValue('ALLOWED_AFFILIATE_HOSTS') ?? 'example.com')
       .split(',')
       .map((host) => host.trim().toLowerCase())
       .filter(Boolean),
@@ -43,6 +44,21 @@ export async function GET(req: Request) {
       { error: 'Affiliate host is not allowed' },
       { status: 400 },
     );
+  }
+
+  const database = getCloudflareBindings().NEWSLETTER_DB;
+
+  if (database) {
+    const category = url.searchParams.get('category') ?? 'unknown';
+    const product = url.searchParams.get('product') ?? 'unknown';
+
+    await database
+      .prepare(
+        `INSERT INTO affiliate_clicks (category, product, destination_url, clicked_at)
+         VALUES (?, ?, ?, ?)`,
+      )
+      .bind(category, product, parsed.toString(), new Date().toISOString())
+      .run();
   }
 
   return NextResponse.redirect(parsed);

@@ -14,12 +14,18 @@
     "preview:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy:preview": "opennextjs-cloudflare build --env preview && opennextjs-cloudflare deploy --env preview",
     "deploy:production": "opennextjs-cloudflare build --env production && opennextjs-cloudflare deploy --env production",
+    "db:migrate:preview": "wrangler d1 migrations apply NEWSLETTER_DB --env preview --remote",
+    "db:migrate:production": "wrangler d1 migrations apply NEWSLETTER_DB --env production --remote",
+    "smoke:preview": "bash scripts/smoke-worker.sh https://deepak-portfolio-preview.dsahu1001.workers.dev",
+    "smoke:production": "bash scripts/smoke-worker.sh https://deepaksahu.dev",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "lint": "eslint . --max-warnings=0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:regression": "npm run lint && npm run typecheck && npm run test && npm run build && npm run test:e2e",
     "harden:secrets": "git log --all -p -- . ':(exclude)node_modules' | grep -iE \"(api[_-]?key|secret|token|password|aws_)\" || true"
   },
   "dependencies": {
@@ -44,6 +50,7 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/typography": "0.5.13",
     "@testing-library/react": "15.0.7",
     "@types/node": "20.14.9",

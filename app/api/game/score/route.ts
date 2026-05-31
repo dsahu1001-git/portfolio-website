@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { getCloudflareBindings } from '@/lib/cloudflare';
 
 const scoreSchema = z.object({
   game: z.string().min(1),
@@ -15,9 +16,28 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid score' }, { status: 400 });
   }
 
-  return NextResponse.json({
-    success: true,
-    saved: false,
-    reason: 'Supabase is not configured yet.',
-  });
+  const database = getCloudflareBindings().NEWSLETTER_DB;
+
+  if (!database) {
+    return NextResponse.json({
+      success: true,
+      saved: false,
+      reason: 'Score storage is not configured in this environment.',
+    });
+  }
+
+  await database
+    .prepare(
+      `INSERT INTO game_scores (game, player_name, score, completed_at)
+       VALUES (?, ?, ?, ?)`,
+    )
+    .bind(
+      parsed.data.game,
+      parsed.data.playerName,
+      parsed.data.score,
+      new Date().toISOString(),
+    )
+    .run();
+
+  return NextResponse.json({ success: true, saved: true });
 }

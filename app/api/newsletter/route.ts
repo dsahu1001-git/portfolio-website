@@ -1,24 +1,41 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { newsletterTopics, subscribe } from '@/lib/newsletter';
 
 const newsletterSchema = z.object({
   email: z.string().email(),
+  topics: z
+    .array(z.enum(newsletterTopics))
+    .min(1, 'Choose at least one topic.')
+    .default(['ai', 'quantum']),
 });
 
 export async function POST(req: Request) {
   const contentType = req.headers.get('content-type') ?? '';
-  const body = contentType.includes('application/json')
+  const rawBody = contentType.includes('application/json')
     ? await req.json()
     : Object.fromEntries(await req.formData());
+  const body = {
+    ...rawBody,
+    topics: Array.isArray(rawBody.topics)
+      ? rawBody.topics
+      : typeof rawBody.topics === 'string'
+        ? rawBody.topics.split(',')
+        : ['ai', 'quantum'],
+  };
   const parsed = newsletterSchema.safeParse(body);
 
   if (!parsed.success) {
-    return NextResponse.json({ error: 'Invalid email' }, { status: 400 });
+    return NextResponse.json(
+      { error: parsed.error.issues[0]?.message ?? 'Invalid subscription' },
+      { status: 400 },
+    );
   }
 
-  if (!process.env.BEEHIIV_API_KEY || !process.env.BEEHIIV_PUBLICATION_ID) {
-    return NextResponse.json({ success: true, mode: 'dry-run' });
-  }
+  const result = await subscribe({
+    ...parsed.data,
+    source: 'portfolio',
+  });
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true, ...result });
 }

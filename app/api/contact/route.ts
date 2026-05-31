@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
+import { getRuntimeValue } from '@/lib/cloudflare';
 
 const contactSchema = z.object({
   name: z.string().min(2).max(100),
@@ -10,8 +11,11 @@ const contactSchema = z.object({
 });
 
 export async function POST(req: Request) {
-  const formData = await req.formData();
-  const parsed = contactSchema.safeParse(Object.fromEntries(formData));
+  const contentType = req.headers.get('content-type') ?? '';
+  const body = contentType.includes('application/json')
+    ? await req.json()
+    : Object.fromEntries(await req.formData());
+  const parsed = contactSchema.safeParse(body);
 
   if (!parsed.success) {
     return NextResponse.json(
@@ -20,7 +24,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = getRuntimeValue('RESEND_API_KEY');
 
   if (!apiKey) {
     return NextResponse.json({ success: true, mode: 'dry-run' });
@@ -28,8 +32,10 @@ export async function POST(req: Request) {
 
   const resend = new Resend(apiKey);
   await resend.emails.send({
-    from: 'Portfolio <onboarding@resend.dev>',
-    to: 'hello@deepaksahu.dev',
+    from:
+      getRuntimeValue('CONTACT_FROM') ??
+      'Portfolio <contact@newsletter.deepaksahu.dev>',
+    to: getRuntimeValue('CONTACT_TO') ?? 'hello@deepaksahu.dev',
     subject: parsed.data.subject,
     reply_to: parsed.data.email,
     text: `${parsed.data.name} <${parsed.data.email}>\n\n${parsed.data.message}`,

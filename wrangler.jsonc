@@ -14,9 +14,31 @@
       "service": "deepak-portfolio",
     },
   ],
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://deepaksahu.dev",
+    "NEWSLETTER_FROM": "Deep Signals <newsletter@newsletter.deepaksahu.dev>",
+    "CONTACT_FROM": "Portfolio <contact@newsletter.deepaksahu.dev>",
+    "CONTACT_TO": "hello@deepaksahu.dev",
+    "ALLOWED_AFFILIATE_HOSTS": "example.com"
+  },
   "env": {
     "preview": {
       "name": "deepak-portfolio-preview",
+      "d1_databases": [
+        {
+          "binding": "NEWSLETTER_DB",
+          "database_name": "deepak-newsletter-preview",
+          "database_id": "3a10a6d6-3c9a-4acf-95aa-f08f615b2af6",
+          "migrations_dir": "migrations"
+        }
+      ],
+      "vars": {
+        "NEXT_PUBLIC_SITE_URL": "https://deepak-portfolio-preview.dsahu1001.workers.dev",
+        "NEWSLETTER_FROM": "Deep Signals <newsletter@newsletter.deepaksahu.dev>",
+        "CONTACT_FROM": "Portfolio <contact@newsletter.deepaksahu.dev>",
+        "CONTACT_TO": "hello@deepaksahu.dev",
+        "ALLOWED_AFFILIATE_HOSTS": "example.com"
+      },
       "services": [
         {
           "binding": "WORKER_SELF_REFERENCE",
@@ -26,6 +48,21 @@
     },
     "production": {
       "name": "deepak-portfolio",
+      "d1_databases": [
+        {
+          "binding": "NEWSLETTER_DB",
+          "database_name": "deepak-newsletter-production",
+          "database_id": "ac9afdf9-97db-4f1a-ac45-50d5b02e8e2a",
+          "migrations_dir": "migrations"
+        }
+      ],
+      "vars": {
+        "NEXT_PUBLIC_SITE_URL": "https://deepaksahu.dev",
+        "NEWSLETTER_FROM": "Deep Signals <newsletter@newsletter.deepaksahu.dev>",
+        "CONTACT_FROM": "Portfolio <contact@newsletter.deepaksahu.dev>",
+        "CONTACT_TO": "hello@deepaksahu.dev",
+        "ALLOWED_AFFILIATE_HOSTS": "example.com"
+      },
       "services": [
         {
           "binding": "WORKER_SELF_REFERENCE",

@@ -67,6 +67,7 @@ make lint
 make typecheck
 make test
 make scan-secrets
+npm run test:regression
 ```
 
 ## Security Notes
@@ -80,10 +81,13 @@ make scan-secrets
 ## Deployment Notes
 
 - The existing GitHub Pages site serves the root static portfolio from `main` at `https://deepaksahu.dev/` until the Next.js migration is approved.
-- `.github/workflows/deploy-cloudflare.yml` packages the Next.js app with OpenNext and deploys `feature/**` branches to the separate `deepak-portfolio-preview` Cloudflare Worker.
+- `.github/workflows/deploy-cloudflare.yml` packages the Next.js app with OpenNext and deploys the `preview` branch to the separate `deepak-portfolio-preview` Cloudflare Worker.
 - Pushes to `main` deploy the `deepak-portfolio` production Worker. Connecting the production Worker to `deepaksahu.dev` remains a separate domain cutover step.
 - Add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` as GitHub Actions repository secrets before running the deployment workflow.
+- Grant the Cloudflare token `Workers Scripts Edit` and `D1 Edit` account permissions. Keep the token encrypted in GitHub; never add it to `.env` files or commit it.
+- Add email-provider values as encrypted GitHub environment secrets: `RESEND_API_KEY`, `NEWSLETTER_ADMIN_TOKEN`, `RESEND_NEWSLETTER_SEGMENT_ID`, `RESEND_TOPIC_AI_ID`, and `RESEND_TOPIC_QUANTUM_ID`. The deployment workflow synchronizes configured values into Cloudflare Worker secrets without printing them.
 - `public/_headers` configures long-lived immutable caching for Next.js static assets on Cloudflare.
+- Each Worker deployment ends with HTTP smoke checks against public pages, newsletter validation, the live puzzle API, and D1-backed score persistence.
 - `robots.txt`, `sitemap.xml`, and canonical metadata assume the production domain is `https://deepaksahu.dev/`.
 - Social preview metadata uses `assets/og-image.svg`.
 
@@ -94,7 +98,7 @@ Launch write-up: `https://deepaksahu.dev/blog` once the public announcement post
 ## Known Limitations
 
 - Some secondary engagement sections are intentionally lightweight until content is added.
-- Contact/newsletter provider integrations require real environment variables and should be configured only outside Git.
+- Contact/newsletter provider integrations require a verified Resend sending domain and encrypted runtime secrets outside Git.
 - Affiliate redirects are restricted to HTTPS hostnames listed in `ALLOWED_AFFILIATE_HOSTS`.
 - The root static site and Next.js app coexist during migration; deployment should choose one entrypoint explicitly.
 - Remote image hosts are intentionally blocked by default in `next.config.mjs`; add explicit trusted hostnames before using external images.
