@@ -1,50 +1,37 @@
 import Link from 'next/link';
 import {
+  Activity,
   ArrowRight,
   BookOpenText,
+  Boxes,
   BriefcaseBusiness,
-  Cpu,
+  CloudCog,
+  CodeXml,
   Gamepad2,
+  GitBranch,
   Newspaper,
   RadioTower,
   ShoppingBag,
+  TerminalSquare,
   Wrench,
 } from 'lucide-react';
 import { BlogCarousel } from '@/components/blog/BlogCarousel';
 import { Hero } from '@/components/marketing/Hero';
 import { NewsletterSignup } from '@/components/marketing/NewsletterSignup';
-import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { getFeaturedPosts } from '@/lib/markdown';
 
-const professionalSignals = [
-  {
-    icon: BriefcaseBusiness,
-    title: 'Career portfolio',
-    description:
-      'The complete recruiter-facing profile: leadership scope, case studies, impact metrics, technical breadth, and career progression.',
-    href: '/work',
-    label: 'Review profile',
-  },
-  {
-    icon: Cpu,
-    title: 'Platform in a Box',
-    description:
-      'A practical golden-path reference project spanning Terraform, Kubernetes, GitOps, observability, and an IDP portal.',
-    href: '/blog/platform-in-a-box',
-    label: 'Read the architecture',
-  },
-  {
-    icon: RadioTower,
-    title: 'Deep Signals',
-    description:
-      'A reviewed weekly briefing on the AI and quantum developments worth keeping in your operating context.',
-    href: '/newsletter',
-    label: 'Open the briefing',
-  },
+const scopeMetrics = [
+  ['100+', 'Kubernetes clusters'],
+  ['1,200+', 'Production workloads'],
+  ['30%+', 'Monthly cost reduction'],
 ];
 
 const engagementUtilities = [
-  { icon: Gamepad2, label: 'Connections India', href: '/games/connections-india' },
+  {
+    icon: Gamepad2,
+    label: 'Connections India',
+    href: '/games/connections-india',
+  },
   { icon: ShoppingBag, label: 'Practical gear', href: '/gear' },
   { icon: Wrench, label: 'Free tools', href: '/tools/infra-cost-checklist' },
 ];
@@ -55,69 +42,166 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <section className="systems-grid border-b border-border bg-card/35">
+
+      <section className="systems-grid border-b border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <p className="font-mono text-xs uppercase text-primary">
-            Professional signal
-          </p>
-          <div className="mt-3 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <h2 className="max-w-3xl font-heading text-2xl font-bold sm:text-3xl">
-              Systems thinking, from infrastructure to engineering leadership.
-            </h2>
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="font-mono text-[10px] uppercase text-primary">
+                Operational_scope
+              </p>
+              <h2 className="mt-3 max-w-3xl font-heading text-2xl font-bold leading-tight sm:text-3xl">
+                Platform leadership, rendered as evidence.
+              </h2>
+            </div>
             <Link
-              className="inline-flex items-center gap-2 font-mono text-xs uppercase text-primary hover:text-teal-200"
+              className="inline-flex items-center gap-2 font-mono text-[10px] uppercase text-primary hover:text-cyan-100"
               href="/work"
             >
-              Full recruiter profile
+              Open recruiter console
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
-          <div className="mt-9 grid gap-4 lg:grid-cols-3">
-            {professionalSignals.map((signal) => {
-              const Icon = signal.icon;
-              return (
-                <Card
-                  className="group border-border bg-background/70 hover:border-primary hover:shadow-signal"
-                  key={signal.href}
-                >
-                  <CardHeader>
-                    <Icon className="h-7 w-7 text-primary" aria-hidden="true" />
-                    <h3 className="mt-5 font-heading text-2xl font-bold">
-                      {signal.title}
-                    </h3>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm leading-6 text-muted-foreground">
-                      {signal.description}
+
+          <div className="mt-8 grid auto-rows-[minmax(168px,auto)] gap-4 md:grid-cols-6">
+            <article className="liquid-card rounded-lg p-6 sm:p-8 md:col-span-4 md:row-span-2">
+              <div className="flex items-center justify-between">
+                <p className="font-mono text-[10px] uppercase text-primary">
+                  Production surface area
+                </p>
+                <Activity className="h-5 w-5 text-primary" aria-hidden="true" />
+              </div>
+              <h3 className="mt-10 max-w-2xl font-heading text-2xl font-bold leading-tight sm:text-3xl">
+                Operational complexity turned into calm, repeatable systems.
+              </h3>
+              <div className="mt-10 grid gap-px overflow-hidden rounded-md border border-white/10 bg-white/10 sm:grid-cols-3">
+                {scopeMetrics.map(([value, label]) => (
+                  <div className="bg-black/35 p-4 backdrop-blur-xl" key={label}>
+                    <p className="liquid-metal-text font-heading text-2xl font-bold">
+                      {value}
                     </p>
-                    <Link
-                      className="mt-6 inline-flex items-center gap-2 font-mono text-xs uppercase text-primary group-hover:text-teal-200"
-                      href={signal.href}
-                    >
-                      {signal.label}
-                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                    </Link>
-                  </CardContent>
-                </Card>
-              );
-            })}
+                    <p className="mt-2 font-mono text-[9px] uppercase leading-4 text-slate-400">
+                      {label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            <Link
+              className="liquid-card group rounded-lg p-5 md:col-span-2"
+              href="/work"
+            >
+              <BriefcaseBusiness
+                className="h-6 w-6 text-primary"
+                aria-hidden="true"
+              />
+              <p className="mt-6 font-mono text-[9px] uppercase text-muted-foreground">
+                Recruiter signal
+              </p>
+              <h3 className="mt-2 font-heading text-lg font-bold">
+                Full career profile
+              </h3>
+              <span className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase text-primary">
+                Explore impact
+                <ArrowRight
+                  className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1"
+                  aria-hidden="true"
+                />
+              </span>
+            </Link>
+
+            <Link
+              className="liquid-card group rounded-lg p-5 md:col-span-2"
+              href="/blog/platform-in-a-box"
+            >
+              <CloudCog className="h-6 w-6 text-primary" aria-hidden="true" />
+              <p className="mt-6 font-mono text-[9px] uppercase text-muted-foreground">
+                Featured architecture
+              </p>
+              <h3 className="mt-2 font-heading text-lg font-bold">
+                Platform in a Box
+              </h3>
+              <span className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase text-primary">
+                Inspect build
+                <ArrowRight
+                  className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1"
+                  aria-hidden="true"
+                />
+              </span>
+            </Link>
+
+            <article className="liquid-card rounded-lg p-5 md:col-span-3">
+              <div className="flex items-center justify-between">
+                <p className="font-mono text-[10px] uppercase text-amber-300">
+                  Proof_of_human
+                </p>
+                <TerminalSquare
+                  className="h-5 w-5 text-amber-300"
+                  aria-hidden="true"
+                />
+              </div>
+              <h3 className="mt-5 font-heading text-lg font-bold">
+                The messy middle is part of the work.
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                Architecture notes, migration trade-offs, telemetry, and the
+                failed iterations that shaped the final platform.
+              </p>
+              <div className="mt-5 grid grid-cols-3 gap-2">
+                {[GitBranch, CodeXml, Boxes].map((Icon, index) => (
+                  <div
+                    className="flex h-10 items-center justify-center rounded border border-white/10 bg-black/20"
+                    key={index}
+                  >
+                    <Icon className="h-4 w-4 text-primary" aria-hidden="true" />
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            <article className="liquid-card rounded-lg p-5 md:col-span-3">
+              <div className="flex items-center justify-between">
+                <p className="font-mono text-[10px] uppercase text-primary">
+                  Signal_vs_noise
+                </p>
+                <RadioTower
+                  className="h-5 w-5 text-primary"
+                  aria-hidden="true"
+                />
+              </div>
+              <h3 className="mt-5 font-heading text-lg font-bold">
+                Deep Signals
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                A reviewed weekly briefing on meaningful AI and quantum
+                developments, grounded in original sources.
+              </p>
+              <Link
+                className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase text-primary"
+                href="/newsletter"
+              >
+                Open briefing
+                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </Link>
+            </article>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-border">
+      <section className="border-b border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="mb-8 flex items-end justify-between gap-5">
             <div>
-              <p className="font-mono text-xs uppercase text-primary">
-                Field notes
+              <p className="font-mono text-[10px] uppercase text-primary">
+                Field_notes
               </p>
-              <h2 className="mt-2 font-heading text-2xl font-bold sm:text-3xl">
+              <h2 className="mt-3 font-heading text-2xl font-bold sm:text-3xl">
                 Technical writing from the work.
               </h2>
             </div>
             <Link
-              className="hidden items-center gap-2 font-mono text-xs uppercase text-primary hover:text-teal-200 sm:inline-flex"
+              className="hidden items-center gap-2 font-mono text-[10px] uppercase text-primary hover:text-cyan-100 sm:inline-flex"
               href="/blog"
             >
               All posts
@@ -128,51 +212,50 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-border bg-card/25">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:px-8">
-          <div>
-            <div className="inline-flex items-center gap-2 font-mono text-xs uppercase text-amber-400">
+      <section className="systems-grid border-b border-white/10">
+        <div className="mx-auto grid max-w-7xl gap-5 px-4 py-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+          <div className="liquid-card rounded-lg p-6">
+            <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase text-amber-300">
               <Newspaper className="h-4 w-4" aria-hidden="true" />
-              Deep Signals
+              Weekly transmission
             </div>
-            <h2 className="mt-3 font-heading text-2xl font-bold sm:text-3xl">
-              Keep the useful signals. Skip the noise.
+            <h2 className="mt-5 font-heading text-2xl font-bold sm:text-3xl">
+              Keep the useful signals.
+              <br />
+              Skip the noise.
             </h2>
-            <p className="mt-3 max-w-xl leading-7 text-muted-foreground">
-              A reviewed weekly dispatch on meaningful AI and quantum
-              developments, with links back to original sources.
+            <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
+              An intentionally small newsletter for AI and quantum developments
+              worth carrying into the next week.
             </p>
           </div>
-          <div className="border border-border bg-background/65 p-5 shadow-signal backdrop-blur-sm">
+          <div className="liquid-card rounded-lg p-6">
             <NewsletterSignup />
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-5 border border-border bg-card/55 px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="font-mono text-[10px] uppercase text-primary">
-              Engagement layer
+              Engagement_layer
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Lightweight extras for a useful detour.
+              Lightweight extras. Useful detours, never the main event.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            {engagementUtilities.map((utility) => {
-              const Icon = utility.icon;
-              return (
-                <Link
-                  className="inline-flex items-center gap-2 border border-border bg-background/50 px-3 py-2 text-xs text-muted-foreground transition-all hover:border-primary hover:text-primary"
-                  href={utility.href}
-                  key={utility.href}
-                >
-                  <Icon className="h-4 w-4" aria-hidden="true" />
-                  {utility.label}
-                </Link>
-              );
-            })}
+            {engagementUtilities.map(({ href, icon: Icon, label }) => (
+              <Link
+                className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.035] px-3 py-2 text-xs text-muted-foreground backdrop-blur-xl transition-all hover:border-primary/60 hover:text-primary"
+                href={href}
+                key={href}
+              >
+                <Icon className="h-4 w-4" aria-hidden="true" />
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
       </section>

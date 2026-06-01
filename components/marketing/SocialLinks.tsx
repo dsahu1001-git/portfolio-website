@@ -20,7 +20,7 @@ export function SocialLinks() {
         return (
           <Link
             aria-label={link.label}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background/45 text-muted-foreground transition-all hover:border-primary hover:text-primary hover:shadow-[0_0_18px_rgba(45,212,191,0.18)]"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-white/[0.045] text-muted-foreground backdrop-blur-xl transition-all hover:border-primary/70 hover:text-primary hover:shadow-[0_0_18px_rgba(0,245,255,0.18)]"
             href={link.href}
             key={link.href}
             rel="noopener noreferrer"

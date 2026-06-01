@@ -11,9 +11,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants: Record<ButtonVariant, string> = {
   default:
-    'border border-primary bg-primary text-primary-foreground shadow-[0_0_24px_rgba(45,212,191,0.22)] hover:bg-teal-300',
+    'border border-primary bg-primary text-primary-foreground shadow-[0_0_24px_rgba(0,245,255,0.2)] hover:bg-cyan-200',
   outline:
-    'border border-border bg-background/60 text-foreground hover:border-primary hover:bg-muted',
+    'border border-white/10 bg-white/[0.045] text-foreground backdrop-blur-xl hover:border-primary/70 hover:bg-white/[0.075]',
   ghost: 'text-muted-foreground hover:bg-muted hover:text-foreground',
 };
 

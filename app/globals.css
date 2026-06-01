@@ -9,27 +9,27 @@
     BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono',
     monospace;
-  --background: 222 47% 5%;
-  --foreground: 190 40% 96%;
-  --card: 221 39% 9%;
+  --background: 0 0% 5%;
+  --foreground: 180 20% 97%;
+  --card: 0 0% 8%;
   --card-foreground: 190 40% 96%;
-  --muted: 218 28% 14%;
-  --muted-foreground: 202 18% 68%;
-  --border: 196 45% 21%;
-  --input: 196 36% 22%;
-  --ring: 185 92% 46%;
+  --muted: 180 7% 14%;
+  --muted-foreground: 190 9% 67%;
+  --border: 180 16% 20%;
+  --input: 180 13% 22%;
+  --ring: 183 100% 50%;
 }
 
 .dark {
-  --background: 222 47% 5%;
+  --background: 0 0% 5%;
   --foreground: 190 40% 96%;
-  --card: 221 39% 9%;
+  --card: 0 0% 8%;
   --card-foreground: 190 40% 96%;
-  --muted: 218 28% 14%;
-  --muted-foreground: 202 18% 68%;
-  --border: 196 45% 21%;
-  --input: 196 36% 22%;
-  --ring: 185 92% 46%;
+  --muted: 180 7% 14%;
+  --muted-foreground: 190 9% 67%;
+  --border: 180 16% 20%;
+  --input: 180 13% 22%;
+  --ring: 183 100% 50%;
 }
 
 * {
@@ -46,6 +46,12 @@ body {
   color: hsl(var(--foreground));
   font-family: var(--font-body), Inter, system-ui, sans-serif;
   text-rendering: optimizeLegibility;
+  background-image: radial-gradient(
+      circle at 72% -15%,
+      rgba(0, 245, 255, 0.08),
+      transparent 30rem
+    ),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.018), transparent 34%);
 }
 
 ::selection {
@@ -58,12 +64,144 @@ body {
 }
 
 .systems-grid {
-  background-image:
-    linear-gradient(rgba(45, 212, 191, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(45, 212, 191, 0.045) 1px, transparent 1px);
+  background-image: linear-gradient(
+      rgba(0, 245, 255, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.04) 1px, transparent 1px);
   background-size: 42px 42px;
 }
 
 .signal-line {
-  background: linear-gradient(90deg, #2dd4bf, #38bdf8 52%, #f59e0b);
+  background: linear-gradient(90deg, #00f5ff, #a78bfa 52%, #f59e0b);
+}
+
+.liquid-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.02) 38%,
+      rgba(0, 245, 255, 0.035)
+    ),
+    rgba(19, 19, 19, 0.72);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    inset 0 -1px 0 rgba(0, 245, 255, 0.08),
+    0 22px 72px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(30px) saturate(135%);
+}
+
+.liquid-card::before {
+  position: absolute;
+  inset: -45% -35%;
+  z-index: -1;
+  content: '';
+  background: linear-gradient(
+    115deg,
+    transparent 32%,
+    rgba(0, 245, 255, 0.13) 48%,
+    rgba(167, 139, 250, 0.08) 54%,
+    transparent 69%
+  );
+  transform: translate3d(-24%, 0, 0) rotate(-8deg);
+  transition: transform 650ms ease;
+}
+
+.liquid-card:hover::before {
+  transform: translate3d(24%, 0, 0) rotate(-8deg);
+}
+
+.liquid-card:hover {
+  border-color: rgba(0, 245, 255, 0.34);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(0, 245, 255, 0.12),
+    0 26px 76px rgba(0, 0, 0, 0.34),
+    0 0 34px rgba(0, 245, 255, 0.09);
+}
+
+.liquid-metal-text {
+  color: transparent;
+  background: linear-gradient(
+    100deg,
+    #ffffff 12%,
+    #00f5ff 48%,
+    #a78bfa 72%,
+    #ffffff
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.liquid-membrane {
+  position: absolute;
+  width: min(48rem, 72vw);
+  height: min(30rem, 50vw);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 46% 54% 67% 33% / 58% 35% 65% 42%;
+  background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.13),
+      transparent 38%
+    ),
+    linear-gradient(
+      115deg,
+      rgba(0, 245, 255, 0.1),
+      rgba(167, 139, 250, 0.07) 62%,
+      rgba(245, 158, 11, 0.07)
+    );
+  box-shadow:
+    inset 28px 18px 80px rgba(255, 255, 255, 0.045),
+    inset -28px -20px 82px rgba(0, 245, 255, 0.08),
+    0 0 90px rgba(0, 245, 255, 0.08);
+  filter: saturate(135%);
+  animation: membrane-shift 14s ease-in-out infinite alternate;
+}
+
+.scan-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 245, 255, 0.8),
+    transparent
+  );
+  animation: scan 5s ease-in-out infinite;
+}
+
+@keyframes membrane-shift {
+  from {
+    border-radius: 46% 54% 67% 33% / 58% 35% 65% 42%;
+    transform: translate3d(0, 0, 0) rotate(-8deg);
+  }
+  to {
+    border-radius: 61% 39% 42% 58% / 41% 62% 38% 59%;
+    transform: translate3d(-3%, 3%, 0) rotate(-3deg);
+  }
+}
+
+@keyframes scan {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateX(-35%);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translateX(35%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

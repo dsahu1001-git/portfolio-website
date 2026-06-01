@@ -17,7 +17,7 @@ const config: Config = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: '#2DD4BF',
+          DEFAULT: '#00F5FF',
           foreground: '#021315',
         },
         accent: {
@@ -35,13 +35,13 @@ const config: Config = {
       },
       fontFamily: {
         body: ['var(--font-body)', 'Inter', 'system-ui', 'sans-serif'],
-        heading: ['var(--font-heading)', 'Inter', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
         mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
       },
       boxShadow: {
         soft: '0 18px 60px rgba(2, 8, 23, 0.34)',
         signal:
-          '0 0 0 1px rgba(45, 212, 191, 0.16), 0 18px 70px rgba(8, 145, 178, 0.12)',
+          '0 0 0 1px rgba(0, 245, 255, 0.16), 0 18px 70px rgba(0, 245, 255, 0.1)',
       },
     },
   },
