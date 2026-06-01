@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Footer } from '@/components/shared/Footer';
 import { Header } from '@/components/shared/Header';
+import { ScrollSignal } from '@/components/shared/ScrollSignal';
 import { ThemeProvider } from '@/components/shared/ThemeProvider';
 import './globals.css';
 
@@ -44,6 +45,7 @@ export default function RootLayout({
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
+            <ScrollSignal />
           </div>
         </ThemeProvider>
       </body>

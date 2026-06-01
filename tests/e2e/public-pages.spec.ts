@@ -13,11 +13,21 @@ const publicPages = [
   ['/blog', 'Practical notes from platform engineering work'],
   [
     '/blog/platform-in-a-box',
-    'Platform in a Box: Building a Golden Path from Terraform to an IDP Portal',
+    'Platform in a Box: What Really Happens After You Click Deploy?',
   ],
-  ['/games', 'Small interactive extras for visitors who want to play for a minute.'],
+  [
+    '/blog/modernizing-cicd-github-actions-argocd-helm',
+    'Your CI/CD Platform Is Not a Museum: A Practical Modernization Playbook',
+  ],
+  [
+    '/games',
+    'Small interactive extras for visitors who want to play for a minute.',
+  ],
   ['/games/connections-india', 'Connections India'],
-  ['/gear', 'Useful recommendations, with affiliate links only where they make sense.'],
+  [
+    '/gear',
+    'Useful recommendations, with affiliate links only where they make sense.',
+  ],
   ['/newsletter', 'Deep Signals'],
   ['/newsletter/welcome-to-deep-signals', 'Welcome to Deep Signals'],
 ] as const;
@@ -25,7 +35,9 @@ const publicPages = [
 for (const [path, heading] of publicPages) {
   test(`${path} renders`, async ({ page }) => {
     await page.goto(path);
-    await expect(page.getByRole('heading', { name: heading }).first()).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: heading }).first(),
+    ).toBeVisible();
   });
 }
 
@@ -68,6 +80,49 @@ test('connections india solves a group', async ({ page }) => {
 test('featured articles carousel advances', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByText('01 / 03')).toBeVisible();
+  await expect(page.locator('.featured-stack-card[data-active="true"]')).toHaveCount(
+    1,
+  );
+  await expect(page.locator('.featured-stack-card[data-active="false"]')).toHaveCount(
+    2,
+  );
   await page.getByRole('button', { name: 'Next featured article' }).click();
   await expect(page.getByText('02 / 03')).toBeVisible();
+});
+
+test('hero scroll cue advances past the first viewport', async ({ page }) => {
+  await page.goto('/');
+  const cue = page.getByRole('button', { name: 'Scroll to explore' });
+
+  await expect(cue).toBeVisible();
+  await cue.click();
+  await expect
+    .poll(() => page.evaluate(() => window.scrollY))
+    .toBeGreaterThan(400);
+  await expect(cue).toHaveClass(/opacity-0/);
+});
+
+test('cicd modernization article contains responsive technical content', async ({
+  page,
+}) => {
+  await page.goto('/blog/modernizing-cicd-github-actions-argocd-helm');
+
+  await expect(
+    page.getByText('Developer pull request', { exact: false }),
+  ).toBeVisible();
+  await expect(page.locator('.prose-brand table')).toHaveCount(4);
+  await expect(page.locator('.prose-brand pre')).toHaveCount(8);
+
+  const layout = await page.evaluate(() => ({
+    bodyWidth: document.body.scrollWidth,
+    viewportWidth: window.innerWidth,
+    technicalBlocks: Array.from(
+      document.querySelectorAll('.prose-brand table, .prose-brand pre'),
+    ).map((element) => getComputedStyle(element).overflowX),
+  }));
+
+  expect(layout.bodyWidth).toBeLessThanOrEqual(layout.viewportWidth);
+  expect(layout.technicalBlocks.every((overflow) => overflow === 'auto')).toBe(
+    true,
+  );
 });

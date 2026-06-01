@@ -2,6 +2,7 @@ import {
   Activity,
   Boxes,
   Gauge,
+  GitBranch,
   Network,
   RadioTower,
   ShieldCheck,
@@ -15,6 +16,16 @@ interface BlogPreviewVisualProps {
 }
 
 function getPreview(post: BlogPost) {
+  if (post.tags.includes('cicd')) {
+    return {
+      eyebrow: 'CI/CD / GitOps',
+      title: 'Modern delivery systems',
+      icon: GitBranch,
+      nodes: [GitBranch, Boxes, Activity],
+      accent: 'text-primary',
+    };
+  }
+
   if (post.tags.includes('observability')) {
     return {
       eyebrow: 'Telemetry / Leadership',

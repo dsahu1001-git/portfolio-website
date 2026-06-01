@@ -1,9 +1,11 @@
 'use client';
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import { BlogCard } from '@/components/blog/BlogCard';
 import { Button } from '@/components/ui/Button';
+import { cn } from '@/lib/utils';
 import type { BlogPost } from '@/types/blog';
 
 interface BlogCarouselProps {
@@ -11,49 +13,10 @@ interface BlogCarouselProps {
 }
 
 export function BlogCarousel({ posts }: BlogCarouselProps) {
-  const scrollerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  function scrollTo(index: number) {
-    const nextIndex = Math.min(Math.max(index, 0), posts.length - 1);
-    const scroller = scrollerRef.current;
-    const card = scroller?.children.item(nextIndex);
-
-    if (!(card instanceof HTMLElement)) {
-      return;
-    }
-
-    card.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'start',
-    });
-    setActiveIndex(nextIndex);
-  }
-
-  function handleScroll() {
-    const scroller = scrollerRef.current;
-
-    if (!scroller) {
-      return;
-    }
-
-    const cards = Array.from(scroller.children);
-    const nearestIndex = cards.reduce((closestIndex, card, index) => {
-      const closestCard = cards[closestIndex];
-      const closestDistance = Math.abs(
-        closestCard.getBoundingClientRect().left -
-          scroller.getBoundingClientRect().left,
-      );
-      const distance = Math.abs(
-        card.getBoundingClientRect().left -
-          scroller.getBoundingClientRect().left,
-      );
-
-      return distance < closestDistance ? index : closestIndex;
-    }, 0);
-
-    setActiveIndex(nearestIndex);
+  function selectPost(index: number) {
+    setActiveIndex(Math.min(Math.max(index, 0), posts.length - 1));
   }
 
   if (posts.length === 0) {
@@ -72,7 +35,7 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
             aria-label="Previous featured article"
             className="h-9 w-9 px-0"
             disabled={activeIndex === 0}
-            onClick={() => scrollTo(activeIndex - 1)}
+            onClick={() => selectPost(activeIndex - 1)}
             type="button"
             variant="outline"
           >
@@ -82,7 +45,7 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
             aria-label="Next featured article"
             className="h-9 w-9 px-0"
             disabled={activeIndex === posts.length - 1}
-            onClick={() => scrollTo(activeIndex + 1)}
+            onClick={() => selectPost(activeIndex + 1)}
             type="button"
             variant="outline"
           >
@@ -91,15 +54,50 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
         </div>
       </div>
       <div
-        className="grid snap-x snap-mandatory auto-cols-[88%] grid-flow-col gap-4 overflow-x-auto pb-3 sm:auto-cols-[64%] lg:auto-cols-[46%]"
-        onScroll={handleScroll}
-        ref={scrollerRef}
+        aria-label="Featured articles"
+        className="featured-stack mx-auto"
+        role="region"
       >
-        {posts.map((post) => (
-          <div className="snap-start" key={post.slug}>
+        {posts.map((post, index) => {
+          const offset = index - activeIndex;
+          const stackPosition =
+            offset === 0 ? 'active' : offset < 0 ? 'before' : 'after';
+
+          return (
+            <div
+              aria-label={
+                offset === 0
+                  ? `Current featured article: ${post.title}`
+                  : `Bring featured article to front: ${post.title}`
+              }
+              className={cn(
+                'featured-stack-card',
+                `featured-stack-card--${stackPosition}`,
+              )}
+              data-active={offset === 0}
+              key={post.slug}
+              onClick={() => selectPost(index)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  selectPost(index);
+                }
+              }}
+              role={offset === 0 ? undefined : 'button'}
+              style={
+                {
+                  '--stack-depth': Math.min(Math.abs(offset), 2),
+                } as CSSProperties
+              }
+              tabIndex={offset === 0 ? -1 : 0}
+            >
+              <span className="featured-stack-depth font-mono text-[9px] uppercase text-cyan-100/70">
+                Signal {String(index + 1).padStart(2, '0')}
+              </span>
             <BlogCard post={post} />
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
