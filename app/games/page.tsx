@@ -26,7 +26,7 @@ export default function GamesPage() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <p className="font-mono text-sm text-primary">Games</p>
-      <h1 className="mt-3 font-heading text-4xl font-bold tracking-tight sm:text-5xl">
+      <h1 className="mt-3 font-heading text-3xl font-bold sm:text-4xl">
         Small interactive extras for visitors who want to play for a minute.
       </h1>
       <div className="mt-10 grid gap-6 md:grid-cols-2">

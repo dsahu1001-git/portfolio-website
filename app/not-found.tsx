@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <section className="mx-auto flex min-h-[70vh] max-w-3xl flex-col items-start justify-center px-4 py-24">
       <p className="font-mono text-sm text-primary">404</p>
-      <h1 className="mt-4 font-heading text-4xl font-bold tracking-tight sm:text-5xl">
+      <h1 className="mt-4 font-heading text-3xl font-bold sm:text-4xl">
         This page is still being provisioned.
       </h1>
       <p className="mt-4 text-lg text-muted-foreground">

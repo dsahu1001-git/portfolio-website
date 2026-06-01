@@ -47,7 +47,7 @@ export function Hero() {
           <p className="mt-7 font-mono text-xs uppercase text-cyan-200">
             Senior engineering manager / Platform engineering leader
           </p>
-          <h1 className="mt-4 max-w-4xl font-heading text-5xl font-bold leading-[1.06] sm:text-6xl lg:text-7xl">
+          <h1 className="mt-4 max-w-4xl font-heading text-4xl font-bold leading-[1.08] sm:text-5xl lg:text-6xl">
             Building reliable, cost-aware{' '}
             <span className="text-primary">developer platforms</span> at scale.
           </h1>

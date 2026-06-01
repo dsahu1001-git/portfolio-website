@@ -13,7 +13,7 @@ export default async function UnsubscribedPage({
   return (
     <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
       <p className="font-mono text-sm text-primary">Deep Signals</p>
-      <h1 className="mt-3 font-heading text-4xl font-bold">
+      <h1 className="mt-3 font-heading text-3xl font-bold sm:text-4xl">
         {isInvalid ? 'That unsubscribe link is no longer valid.' : 'You are unsubscribed.'}
       </h1>
       <p className="mt-4 leading-7 text-muted-foreground">

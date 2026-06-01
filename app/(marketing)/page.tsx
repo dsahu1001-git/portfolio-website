@@ -10,7 +10,7 @@ import {
   ShoppingBag,
   Wrench,
 } from 'lucide-react';
-import { BlogList } from '@/components/blog/BlogList';
+import { BlogCarousel } from '@/components/blog/BlogCarousel';
 import { Hero } from '@/components/marketing/Hero';
 import { NewsletterSignup } from '@/components/marketing/NewsletterSignup';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
@@ -61,7 +61,7 @@ export default function HomePage() {
             Professional signal
           </p>
           <div className="mt-3 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <h2 className="max-w-3xl font-heading text-3xl font-bold sm:text-4xl">
+            <h2 className="max-w-3xl font-heading text-2xl font-bold sm:text-3xl">
               Systems thinking, from infrastructure to engineering leadership.
             </h2>
             <Link
@@ -112,7 +112,7 @@ export default function HomePage() {
               <p className="font-mono text-xs uppercase text-primary">
                 Field notes
               </p>
-              <h2 className="mt-2 font-heading text-3xl font-bold">
+              <h2 className="mt-2 font-heading text-2xl font-bold sm:text-3xl">
                 Technical writing from the work.
               </h2>
             </div>
@@ -124,7 +124,7 @@ export default function HomePage() {
               <BookOpenText className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
-          <BlogList posts={featuredPosts} />
+          <BlogCarousel posts={featuredPosts} />
         </div>
       </section>
 
@@ -135,7 +135,7 @@ export default function HomePage() {
               <Newspaper className="h-4 w-4" aria-hidden="true" />
               Deep Signals
             </div>
-            <h2 className="mt-3 font-heading text-3xl font-bold">
+            <h2 className="mt-3 font-heading text-2xl font-bold sm:text-3xl">
               Keep the useful signals. Skip the noise.
             </h2>
             <p className="mt-3 max-w-xl leading-7 text-muted-foreground">

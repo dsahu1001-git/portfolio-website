@@ -27,7 +27,7 @@ export default async function GearCategoryPage({
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <p className="font-mono text-sm text-primary">Gear category</p>
-      <h1 className="mt-3 font-heading text-4xl font-bold capitalize tracking-tight">
+      <h1 className="mt-3 font-heading text-3xl font-bold capitalize sm:text-4xl">
         {category.replaceAll('-', ' ')}
       </h1>
       {guides.length > 0 ? (

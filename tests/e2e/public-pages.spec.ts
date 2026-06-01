@@ -64,3 +64,10 @@ test('connections india solves a group', async ({ page }) => {
   await page.getByRole('button', { name: 'Submit' }).click();
   await expect(page.getByRole('heading', { name: 'IPL Teams' })).toBeVisible();
 });
+
+test('featured articles carousel advances', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByText('01 / 03')).toBeVisible();
+  await page.getByRole('button', { name: 'Next featured article' }).click();
+  await expect(page.getByText('02 / 03')).toBeVisible();
+});

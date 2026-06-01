@@ -9,8 +9,6 @@ tags:
   - leadership
   - grafana
 category: 'platform'
-heroImage: /images/blog/placeholder.svg
-heroImageAlt: 'Abstract observability placeholder'
 draft: false
 featured: true
 readingTime: '5 min read'

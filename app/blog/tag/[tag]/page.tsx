@@ -27,7 +27,7 @@ export default async function TagPage({ params }: TagPageProps) {
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <p className="font-mono text-sm text-primary">Tag</p>
-      <h1 className="mt-3 font-heading text-4xl font-bold tracking-tight">
+      <h1 className="mt-3 font-heading text-3xl font-bold sm:text-4xl">
         #{tag}
       </h1>
       <div className="mt-10">

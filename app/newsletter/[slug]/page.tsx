@@ -37,7 +37,9 @@ export default async function NewsletterEditionPage({
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <p className="font-mono text-sm text-primary">Deep Signals</p>
-      <h1 className="mt-3 font-heading text-4xl font-bold">{edition.title}</h1>
+      <h1 className="mt-3 font-heading text-3xl font-bold sm:text-4xl">
+        {edition.title}
+      </h1>
       <p className="mt-4 text-muted-foreground">{edition.description}</p>
       <p className="mt-5 font-mono text-xs text-muted-foreground">
         {edition.publishedAt}

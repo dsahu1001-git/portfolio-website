@@ -20,7 +20,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <p className="font-mono text-sm text-primary">Free tool</p>
-      <h1 className="mt-3 font-heading text-4xl font-bold capitalize tracking-tight">
+      <h1 className="mt-3 font-heading text-3xl font-bold capitalize sm:text-4xl">
         {tool.replaceAll('-', ' ')}
       </h1>
       <p className="mt-5 text-lg leading-8 text-muted-foreground">

@@ -19,7 +19,7 @@ export default function NewsletterPage() {
     <section className="systems-grid border-b border-border">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
       <p className="font-mono text-xs uppercase text-primary">Newsletter / Intelligence briefing</p>
-      <h1 className="mt-3 font-heading text-4xl font-bold sm:text-5xl">
+      <h1 className="mt-3 font-heading text-3xl font-bold sm:text-4xl">
         Deep Signals
       </h1>
       <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">

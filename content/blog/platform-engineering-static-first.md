@@ -9,8 +9,6 @@ tags:
   - nextjs
   - performance
 category: 'tech'
-heroImage: /images/blog/placeholder.svg
-heroImageAlt: 'Abstract static-first architecture placeholder'
 draft: false
 featured: true
 readingTime: '3 min read'

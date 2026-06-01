@@ -15,7 +15,7 @@ export default function AboutPage() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-[0.8fr_1.2fr] lg:px-8">
       <div>
         <p className="font-mono text-xs uppercase text-primary">About / Origin</p>
-        <h1 className="mt-3 font-heading text-4xl font-bold tracking-tight sm:text-5xl">
+        <h1 className="mt-3 font-heading text-3xl font-bold sm:text-4xl">
           I build teams and platforms that make delivery boring in the best way.
         </h1>
         <div className="mt-8">

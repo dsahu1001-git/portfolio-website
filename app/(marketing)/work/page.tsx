@@ -197,7 +197,7 @@ export default function WorkPage() {
             <p className="font-mono text-xs uppercase text-primary">
               Career portfolio / Recruiter console
             </p>
-            <h1 className="mt-3 max-w-4xl font-heading text-4xl font-bold tracking-tight sm:text-5xl">
+            <h1 className="mt-3 max-w-4xl font-heading text-3xl font-bold sm:text-4xl">
               Platform engineering leadership from production operations to
               global-scale enablement.
             </h1>

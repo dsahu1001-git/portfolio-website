@@ -19,7 +19,7 @@ export default function GearPage() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <p className="font-mono text-sm text-primary">Gear</p>
-      <h1 className="mt-3 font-heading text-4xl font-bold tracking-tight sm:text-5xl">
+      <h1 className="mt-3 font-heading text-3xl font-bold sm:text-4xl">
         Useful recommendations, with affiliate links only where they make sense.
       </h1>
       <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">

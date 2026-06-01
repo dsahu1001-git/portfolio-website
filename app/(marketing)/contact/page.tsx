@@ -15,7 +15,7 @@ export default function ContactPage() {
     <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-[0.8fr_1.2fr] lg:px-8">
       <div>
         <p className="font-mono text-sm text-primary">Contact</p>
-        <h1 className="mt-3 font-heading text-4xl font-bold tracking-tight sm:text-5xl">
+        <h1 className="mt-3 font-heading text-3xl font-bold sm:text-4xl">
           Let&apos;s talk platform engineering, leadership, or a practical
           collaboration.
         </h1>

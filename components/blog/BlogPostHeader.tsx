@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/Badge';
+import { BlogPreviewVisual } from '@/components/blog/BlogPreviewVisual';
 import type { BlogPost } from '@/types/blog';
 
 interface BlogPostHeaderProps {
@@ -11,7 +12,7 @@ export function BlogPostHeader({ post }: BlogPostHeaderProps) {
   return (
     <header className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
       <Badge>{post.category}</Badge>
-      <h1 className="mt-5 font-heading text-4xl font-bold tracking-tight sm:text-5xl">
+      <h1 className="mt-5 font-heading text-3xl font-bold sm:text-4xl">
         {post.title}
       </h1>
       <p className="mt-4 text-lg leading-8 text-muted-foreground">
@@ -23,7 +24,7 @@ export function BlogPostHeader({ post }: BlogPostHeaderProps) {
         <span>By {post.author}</span>
       </div>
       {post.heroImage ? (
-        <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-xl border border-border bg-muted">
+        <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-lg border border-border bg-muted">
           <Image
             alt={post.heroImageAlt ?? ''}
             className="object-cover"
@@ -33,7 +34,11 @@ export function BlogPostHeader({ post }: BlogPostHeaderProps) {
             src={post.heroImage}
           />
         </div>
-      ) : null}
+      ) : (
+        <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-lg border border-border bg-muted">
+          <BlogPreviewVisual className="min-h-full" post={post} />
+        </div>
+      )}
     </header>
   );
 }

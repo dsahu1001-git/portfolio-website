@@ -23,7 +23,7 @@ export default function BlogIndexPage() {
       <div className="grid gap-10 lg:grid-cols-[1fr_280px]">
         <div>
           <p className="font-mono text-xs uppercase text-primary">Field notes / Blog</p>
-          <h1 className="mt-3 font-heading text-4xl font-bold tracking-tight sm:text-5xl">
+          <h1 className="mt-3 font-heading text-3xl font-bold sm:text-4xl">
             Practical notes from platform engineering work.
           </h1>
           <div className="mt-10">

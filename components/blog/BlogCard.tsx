@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import { Badge } from '@/components/ui/Badge';
+import { BlogPreviewVisual } from '@/components/blog/BlogPreviewVisual';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import type { BlogPost } from '@/types/blog';
 
@@ -25,7 +26,14 @@ export function BlogCard({ post }: BlogCardProps) {
             src={post.heroImage}
           />
         </Link>
-      ) : null}
+      ) : (
+        <Link
+          className="relative block aspect-[16/9] overflow-hidden bg-muted"
+          href={`/blog/${post.slug}`}
+        >
+          <BlogPreviewVisual post={post} />
+        </Link>
+      )}
       <CardHeader>
         <div className="flex flex-wrap items-center gap-2">
           <Badge>{post.category}</Badge>
@@ -33,7 +41,7 @@ export function BlogCard({ post }: BlogCardProps) {
             {format(new Date(post.publishedAt), 'MMM d, yyyy')}
           </span>
         </div>
-        <h2 className="mt-4 font-heading text-2xl font-bold">
+        <h2 className="mt-4 font-heading text-xl font-bold sm:text-2xl">
           <Link className="hover:text-primary" href={`/blog/${post.slug}`}>
             {post.title}
           </Link>
