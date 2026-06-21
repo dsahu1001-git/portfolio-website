@@ -102,6 +102,18 @@ test('hero scroll cue advances past the first viewport', async ({ page }) => {
   await expect(cue).toHaveClass(/opacity-0/);
 });
 
+test('/contact renders the contact form', async ({ page }) => {
+  await page.goto('/contact');
+  await expect(
+    page.getByRole('heading', { name: /Let's talk platform engineering/i }),
+  ).toBeVisible();
+  await expect(page.getByPlaceholder('Your name')).toBeVisible();
+  await expect(page.getByPlaceholder('you@example.com')).toBeVisible();
+  await expect(page.getByPlaceholder('Subject')).toBeVisible();
+  await expect(page.getByPlaceholder('What should we talk about?')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Send message' })).toBeVisible();
+});
+
 test('cicd modernization article contains responsive technical content', async ({
   page,
 }) => {

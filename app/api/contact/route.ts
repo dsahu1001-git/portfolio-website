@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
 import { getRuntimeValue } from '@/lib/cloudflare';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 const contactSchema = z.object({
   name: z.string().min(2).max(100),
@@ -11,6 +12,15 @@ const contactSchema = z.object({
 });
 
 export async function POST(req: Request) {
+  const rateLimit = await checkRateLimit(req);
+
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      { status: 429, headers: { 'Retry-After': String(rateLimit.retryAfter) } },
+    );
+  }
+
   const contentType = req.headers.get('content-type') ?? '';
   const body = contentType.includes('application/json')
     ? await req.json()

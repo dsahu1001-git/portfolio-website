@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { checkRateLimit } from '@/lib/rate-limit';
 import { newsletterTopics, subscribe } from '@/lib/newsletter';
 
 const newsletterSchema = z.object({
@@ -11,6 +12,15 @@ const newsletterSchema = z.object({
 });
 
 export async function POST(req: Request) {
+  const rateLimit = await checkRateLimit(req);
+
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      { status: 429, headers: { 'Retry-After': String(rateLimit.retryAfter) } },
+    );
+  }
+
   const contentType = req.headers.get('content-type') ?? '';
   const rawBody = contentType.includes('application/json')
     ? await req.json()

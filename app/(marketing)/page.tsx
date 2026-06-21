@@ -62,6 +62,25 @@ export default function HomePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: 'Deepak Kumar Sahu',
+            jobTitle: 'Senior Engineering Manager / Platform Engineering Leader',
+            url: 'https://deepaksahu.dev',
+            sameAs: [
+              'https://github.com/dsahu1001-git',
+            ],
+            worksFor: {
+              '@type': 'Organization',
+              name: 'Deepak Kumar Sahu',
+            },
+          }),
+        }}
+      />
       <Hero />
 
       <section className="systems-grid border-b border-white/10">

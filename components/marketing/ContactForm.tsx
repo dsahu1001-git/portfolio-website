@@ -4,10 +4,12 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
+import { useToast } from '@/components/ui/ToastProvider';
 
 export function ContactForm() {
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -22,18 +24,18 @@ export function ContactForm() {
       mode?: string;
     };
 
-    setMessage(
-      response.ok
-        ? result.mode === 'dry-run'
-          ? 'Message validated. Email delivery is not configured yet.'
-          : 'Message sent. I will get back to you soon.'
-        : result.error ?? 'Unable to send your message.',
-    );
-    setIsSubmitting(false);
-
     if (response.ok) {
+      toast(
+        result.mode === 'dry-run'
+          ? 'Message validated. Email delivery is not configured yet.'
+          : 'Message sent. I will get back to you soon.',
+        'success',
+      );
       event.currentTarget.reset();
+    } else {
+      toast(result.error ?? 'Unable to send your message.', 'error');
     }
+    setIsSubmitting(false);
   }
 
   return (

@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { BlogPostHeader } from '@/components/blog/BlogPostHeader';
+import { ReadingProgress } from '@/components/blog/ReadingProgress';
 import { getAllPosts, getPostBySlug } from '@/lib/markdown';
 import { markdownToHtml } from '@/lib/mdx';
 
@@ -52,6 +53,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <article>
+      <ReadingProgress />
       <BlogPostHeader post={post} />
       <div className="mx-auto max-w-3xl px-4 pb-20 sm:px-6 lg:px-8">
         <div

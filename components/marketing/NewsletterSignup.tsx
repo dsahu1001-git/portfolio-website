@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { useToast } from '@/components/ui/ToastProvider';
 
 interface NewsletterSignupProps {
   compact?: boolean;
@@ -11,6 +12,7 @@ interface NewsletterSignupProps {
 export function NewsletterSignup({ compact = false }: NewsletterSignupProps) {
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -31,19 +33,17 @@ export function NewsletterSignup({ compact = false }: NewsletterSignupProps) {
       message?: string;
     };
 
-    setMessage(result.message ?? result.error ?? 'Please try again.');
-    setIsSubmitting(false);
-
     if (response.ok) {
+      toast(result.message ?? 'Successfully subscribed!', 'success');
       event.currentTarget.reset();
+    } else {
+      toast(result.error ?? 'Please try again.', 'error');
     }
+    setIsSubmitting(false);
   }
 
   return (
-    <form
-      className="space-y-3"
-      onSubmit={handleSubmit}
-    >
+    <form className="space-y-3" onSubmit={handleSubmit}>
       <div
         className={
           compact

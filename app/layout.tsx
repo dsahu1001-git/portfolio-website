@@ -3,6 +3,9 @@ import { Footer } from '@/components/shared/Footer';
 import { Header } from '@/components/shared/Header';
 import { ScrollSignal } from '@/components/shared/ScrollSignal';
 import { ThemeProvider } from '@/components/shared/ThemeProvider';
+import { ToastProvider } from '@/components/ui/ToastProvider';
+import { BackToTop } from '@/components/shared/BackToTop';
+import { CopyCodeButton } from '@/components/blog/CopyCodeButton';
 import './globals.css';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://deepaksahu.dev';
@@ -41,12 +44,16 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="font-body antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <ScrollSignal />
-          </div>
+          <ToastProvider>
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <ScrollSignal />
+              <BackToTop />
+            </div>
+            <CopyCodeButton />
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>

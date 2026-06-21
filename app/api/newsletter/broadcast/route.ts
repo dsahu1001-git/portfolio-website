@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { checkRateLimit } from '@/lib/rate-limit';
 import { createNewsletterBroadcast } from '@/lib/broadcast';
 import { getRuntimeValue } from '@/lib/cloudflare';
 import { getNewsletterEdition } from '@/lib/newsletter-content';
@@ -10,6 +11,15 @@ const broadcastSchema = z.object({
 });
 
 export async function POST(req: Request) {
+  const rateLimit = await checkRateLimit(req);
+
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      { status: 429, headers: { 'Retry-After': String(rateLimit.retryAfter) } },
+    );
+  }
+
   const expectedToken = getRuntimeValue('NEWSLETTER_ADMIN_TOKEN');
   const suppliedToken = req.headers.get('authorization')?.replace('Bearer ', '');
 
